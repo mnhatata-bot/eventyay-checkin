@@ -66,9 +66,14 @@ describe('offline resilience', () => {
     expect(index.checkInLists[0].id).toBe(3)
 
     const evaluation = evaluateLocalRedeem(index, 'ticket-secret', { listId: 3, type: 'entry' })
-    expect(evaluation.ok).toBe(true)
+    expect(evaluation.ok).toBe(false)
+    // This legacy snapshot contains NO issuer-signed list/zone entitlement.
+    expect(evaluation.reason).toBe('list-not-authorized')
+    expect(() => applyLocalCheckin(index, evaluation.position, { listId: 3, type: 'entry' }))
+      .toThrow('authoritative server reconciliation')
 
-    applyLocalCheckin(index, evaluation.position, { listId: 3, type: 'entry' })
+    // Historical pending records must survive encrypted storage, but may not
+    // replay automatically until a native server validates them.
     enqueuePendingRedeem(index, {
       secret: 'ticket-secret',
       lists: [3],
