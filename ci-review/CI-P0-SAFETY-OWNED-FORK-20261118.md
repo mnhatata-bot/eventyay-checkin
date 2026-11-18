@@ -37,3 +37,24 @@ The two source-review Node tests are imported under `ci-review/` with paths adju
 5. **Release:** deliberate source merge and an approved unified Corporate Interface full-product UAT, after the above evidence. The `development` branch and any prior accepted CI UAT must remain unchanged until approval.
 
 **No Hostinger, GitHub Actions or deployment operations were requested or performed by this checkpoint.**
+
+
+## Exact-source independent native verification — 18 November 2026
+
+A separate, **ephemeral Vercel Sandbox** successfully checked out the authentic owned full-history fork, exact commit `1daadcbf0d053660a512798f1cf8d57f54d94eb6` (not a reconstructed vendor snapshot), on Node.js `v22.23.5` and npm `10.9.9`. Project: `corporate-interface-native-qa` (project `prj_JgONukaRkJuGwMnAekEQNG5wld6Z`), session `sbx_p8IoaLMkr8RoJu904r9H6395sj6D`. This environment has **no production credentials or customer data** and is not Hostinger, GitHub Actions or any existing Render UAT deployment.
+
+| Command | Actual observed result |
+| --- | --- |
+| `git rev-parse HEAD` | `1daadcbf0d053660a512798f1cf8d57f54d94eb6`, clean tracked worktree |
+| `node --test ci-review/checkin-offline-p0.test.mjs ci-review/checkin-registration-p0.test.mjs` | **13/13 PASS**, 0 failed; original patch source-blob proofs passed |
+| `npm ci --ignore-scripts --no-audit --no-fund --no-progress` | **PASS** |
+| `npm run test:unit -- --run --maxWorkers 1` | **16/16 Vitest files pass; 102 passed / 1 skipped (103 total)** |
+| `npm run i18n:check` | **PASS**; 12 fully translated locales (including Arabic), 359 matching keys per locale |
+| `npm run build` | **PASS**; dist assets built, Vite nonfatal large-chunk/dynamic-import warnings |
+| `npm run lint` | **PASS**, no warnings (max-warnings=0) |
+| `npm run format:check` | **PASS** for the configured source-test glob |
+
+Native commands ran via sandbox command IDs `cmd_d90ee72ba44c467aa197013bf862` (source checkout, 13 P0 tests, npm ci), `cmd_c14627c6a50748d1b9a929469d1e` (Vitest, i18n, build), `cmd_1f9b0f008b4a439fa8b8c0831d8c` (lint, format). No GitHub Actions were triggered; sandbox lifecycle is controlled separately. These results certify the **patched Check-in frontend native source/build regression at the exact SHA only**.
+
+**Not certified:** authenticated Eventyay server/API/DB/worker installation; issuer-controlled payment/free/complimentary entitlement; real scanner provisioning or revoked credential lifecycle; original Eventyay server-side two-scanner end-to-end race; physical gates; customer transactions; deployment/rollback; full CI 20-module and 13-pack acceptance. Unsafe offline admission/payment actions remain **deliberately disabled**. Do not promote this source branch to paid/customer admission until these independent gates have evidence.
+
